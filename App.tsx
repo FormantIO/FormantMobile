@@ -21,6 +21,7 @@ import RealtimePlayer from "./RealtimePlayer";
 import Joystick from "./Joystick";
 
 const DEFAULT_AGENT_ENDPOINT = "ericpi"; // '10.4.4.182:5502';
+const JOYSTICK_STREAM_NAME = "/joystick";
 const ENABLE_TELEMETRY_LOGGING = false;
 const LAN_MODE = false;
 const VIDEO_ASPECT_RATIO = 9 / 16;
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 let playerRef: React.MutableRefObject<WebView> | null = null;
-let joystickDataChannel: DataChannel | null = null;
+let connectedDevice: Device | PeerDevice | null = null;
 
 async function getLANOrRemoteDevice(
     deviceDescriptor: string
@@ -72,6 +73,7 @@ function startVideoFn(deviceDescriptor: string) {
             });
 
             device.on("disconnect", () => {
+                connectedDevice = null;
                 console.log(`Disconnected from device: ${deviceDescriptor}`);
             });
 
@@ -92,12 +94,8 @@ function startVideoFn(deviceDescriptor: string) {
             device
                 .startRealtimeConnection()
                 .then(async () => {
+                    connectedDevice = device;
                     console.log("Started realtime connection");
-
-                    joystickDataChannel = await device.createCustomDataChannel(
-                        "joystick"
-                    );
-                    console.log("Created joystick data channel");
 
                     device.getRealtimeVideoStreams().then(videoStreams => {
                         console.log("Got realtime video streams:");
@@ -145,10 +143,32 @@ export default function App() {
     };
 
     const onJoystickEvent = (x: number, y: number) => {
-        const stringEvent = JSON.stringify({ x, y });
-        console.log(`Got joystick event: ${stringEvent}`);
-        if (joystickDataChannel) {
-            joystickDataChannel.send(stringEvent);
+        console.log(`Got joystick event: ${JSON.stringify({ x, y })}`);
+        if (connectedDevice) {
+            connectedDevice.sendRealtimeMessage({
+                header: {
+                    stream: {
+                        entityId: connectedDevice.id,
+                        streamName: JOYSTICK_STREAM_NAME,
+                        streamType: "twist"
+                    },
+                    created: Date.now()
+                },
+                payload: {
+                    twist: {
+                        linear: {
+                            x: y,
+                            y: 0,
+                            z: 0
+                        },
+                        angular: {
+                            x: 0,
+                            y: 0,
+                            z: x
+                        }
+                    }
+                }
+            });
         }
     };
 
