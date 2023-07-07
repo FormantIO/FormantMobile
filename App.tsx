@@ -5,6 +5,7 @@ import { registerGlobals } from "react-native-webrtc";
 registerGlobals();
 
 import { Button, StyleSheet, TextInput, View, Dimensions } from "react-native";
+import { Asset } from "expo-asset";
 import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import WebView from "react-native-webview";
@@ -40,7 +41,9 @@ async function getLANOrRemoteDevice(
     if (LAN_MODE) {
         return Fleet.getPeerDevice(`http://${deviceDescriptor}`);
     } else {
-        await Authentication.login("", "");
+        const credsString = await loadCloudAuth();
+        const creds = JSON.parse(credsString);
+        await Authentication.login(creds.username, creds.password);
         const devices = await Fleet.getDevices();
         let device: Device;
         for (const device of devices) {
@@ -49,6 +52,12 @@ async function getLANOrRemoteDevice(
             }
         }
     }
+}
+
+async function loadCloudAuth(): Promise<string | null> {
+    const file = Asset.fromModule(require("./assets/auth.json.txt"));
+    const fileContents = await fetch(file.uri);
+    return fileContents.text();
 }
 
 function startVideoFn(deviceDescriptor: string) {

@@ -17,4 +17,4 @@ web-build/
 .metro-health-check*
 
 # Auth creds
-auth.json
+auth.json.txt

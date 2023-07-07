@@ -37,7 +37,7 @@ const playerHTML = `
 `;
 
 async function loadPlayerJS(): Promise<string | null> {
-    let file = Asset.fromModule(require("./assets/player.txt"));
+    const file = Asset.fromModule(require("./assets/player.txt"));
     const fileContents = await fetch(file.uri);
     return fileContents.text();
 }
