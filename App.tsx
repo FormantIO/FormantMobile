@@ -40,10 +40,7 @@ async function getLANOrRemoteDevice(
     if (LAN_MODE) {
         return Fleet.getPeerDevice(`http://${deviceDescriptor}`);
     } else {
-        await Authentication.login(
-            "eric+demos@formant.io",
-            "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-        );
+        await Authentication.login("", "");
         const devices = await Fleet.getDevices();
         let device: Device;
         for (const device of devices) {
