@@ -10,15 +10,9 @@ import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import WebView from "react-native-webview";
 
-import {
-    Authentication,
-    DataChannel,
-    Device,
-    Fleet,
-    PeerDevice
-} from "./data-sdk.es6";
-import RealtimePlayer from "./RealtimePlayer";
-import Joystick from "./Joystick";
+import { Authentication, Device, Fleet, PeerDevice } from "./data-sdk.es6";
+import RealtimePlayer from "./components/RealtimePlayer";
+import Joystick from "./components/Joystick";
 
 const DEFAULT_AGENT_ENDPOINT = "ericpi"; // '10.4.4.182:5502';
 const JOYSTICK_STREAM_NAME = "/joystick";

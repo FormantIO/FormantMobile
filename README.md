@@ -19,9 +19,3 @@ You should only need to do this if `@formant/ui-sdk-realtime-player` or its depe
 1. `cd` into `telep-peer-rn` and `npm i`
 2. `npm run build`
 3. Copy the contents of dist/assets/{HASH}.js into player.txt located in the Expo assets folder
-
-## TODO
-
-1. Joystick needs to send typed joystick stream rather than custom data channel to match FE behavior
-2. Package RealtimePlayer/Joystick components and publish to npmjs
-3. Investigate performance improvements, such as base64decoding H.264 frames into an ArrayBuffer before posting to WebView
