@@ -15,11 +15,10 @@ import RealtimePlayer from "./components/RealtimePlayer";
 import Joystick from "./components/Joystick";
 
 const JOYSTICK_STREAM_NAME = "/joystick";
-const ENABLE_TELEMETRY_LOGGING = false;
 const LAN_MODE = false;
 // when making a direct connection, the IP and port must be specified. when making a connection
 // through the Formant stack, specify the device name
-const DEFAULT_AGENT_ENDPOINT = LAN_MODE ? "10.4.4.182:5502" : "ericpi";
+const DEFAULT_AGENT_ENDPOINT = LAN_MODE ? "192.168.1.100:5502" : "robotname";
 const VIDEO_ASPECT_RATIO = 9 / 16;
 
 const styles = StyleSheet.create({
@@ -107,14 +106,6 @@ function startVideoFn(deviceDescriptor: string) {
                 .catch(error => {
                     console.error(error);
                 });
-
-            if (ENABLE_TELEMETRY_LOGGING) {
-                setInterval(() => {
-                    device.getLatestTelemetry().then(results => {
-                        console.log(results);
-                    });
-                }, 1000 * 3);
-            }
         })
         .catch(error => {
             console.error(error);
