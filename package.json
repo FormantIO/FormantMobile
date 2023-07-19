@@ -10,7 +10,8 @@
     },
     "dependencies": {
         "@config-plugins/react-native-webrtc": "^6.0.0",
-        "@formant/data-sdk": "^1.5.4",
+        "@formant/data-sdk": "^1.8.0",
+        "@formant/realtime-sdk": "^1.0.0",
         "cross-fetch": "^3.1.6",
         "expo": "~48.0.18",
         "expo-asset": "~8.9.1",

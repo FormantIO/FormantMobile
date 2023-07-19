@@ -10,7 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import WebView from "react-native-webview";
 
-import { Authentication, Device, Fleet, PeerDevice } from "./data-sdk.es6";
+import { Authentication, Device, Fleet, PeerDevice } from "@formant/data-sdk";
 import RealtimePlayer from "./components/RealtimePlayer";
 import Joystick from "./components/Joystick";
 
