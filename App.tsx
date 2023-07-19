@@ -14,10 +14,12 @@ import { Authentication, Device, Fleet, PeerDevice } from "@formant/data-sdk";
 import RealtimePlayer from "./components/RealtimePlayer";
 import Joystick from "./components/Joystick";
 
-const DEFAULT_AGENT_ENDPOINT = "ericpi"; // '10.4.4.182:5502';
 const JOYSTICK_STREAM_NAME = "/joystick";
 const ENABLE_TELEMETRY_LOGGING = false;
 const LAN_MODE = false;
+// when making a direct connection, the IP and port must be specified. when making a connection
+// through the Formant stack, specify the device name
+const DEFAULT_AGENT_ENDPOINT = LAN_MODE ? "10.4.4.182:5502" : "ericpi";
 const VIDEO_ASPECT_RATIO = 9 / 16;
 
 const styles = StyleSheet.create({
