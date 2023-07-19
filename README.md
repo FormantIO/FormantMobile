@@ -17,6 +17,7 @@ React Native example app using Formant's data-sdk
 
 1. Set the `LAN_MODE` const based on if you want to make a direct IP connection to an agent vs routing through the Formant cloud
     1. If you are using `LAN_MODE`, your agent must be at least version `1.132.40` or higher
+        1. You must also set `export FORMANT_AGENT_IP=0.0.0.0` (or the device's private IP accessible to the client) in /var/lib/formant/.bashrc
     2. If you are _not_ connecting locally, make sure to copy `auth.example.json.txt` to `auth.json.txt` and fill in your login
         1. This file is explicitly ignored in the gitignore
 2. Update the `DEFAULT_AGENT_ENDPOINT` const to reflect your device's name or IP address. Port 5502 is the default
