@@ -13,10 +13,6 @@
         },
         "plugins": ["@config-plugins/react-native-webrtc"],
         "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true,
-            "bundleIdentifier": "com.ericformant.FormantMobile"
-        },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
@@ -25,11 +21,6 @@
         },
         "web": {
             "favicon": "./assets/favicon.png"
-        },
-        "extra": {
-            "eas": {
-                "projectId": "995b52b1-c23b-4413-a3c9-e6e6b94c02d5"
-            }
         }
     }
 }
